@@ -1,5 +1,9 @@
+#!/usr/bin/env groovy
+
+
 properties([parameters([string(defaultValue: 'test', description: 'test or verify', name: 'testType', trim: false)])])
 
+def call() {
 node {
     stage("git") {
         git url: 'https://github.com/hyunil-shin/java-maven-junit-helloworld.git', branch: "master"
@@ -15,4 +19,5 @@ node {
         junit 'target/surefire-reports/*.xml'
         jacoco execPattern: 'target/**.exec'
     }
+}
 }
